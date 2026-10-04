@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": { "layer0": "minenorth_permis:item/card_permis" },
+  "overrides": [
+    { "predicate": { "minenorth_permis:style": 0.1 }, "model": "minenorth_permis:item/card_licence" },
+    { "predicate": { "minenorth_permis:style": 0.2 }, "model": "minenorth_permis:item/card_arme" },
+    { "predicate": { "minenorth_permis:style": 0.3 }, "model": "minenorth_permis:item/card_peche" }
+  ]
+}
