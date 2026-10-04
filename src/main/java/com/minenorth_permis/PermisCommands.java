@@ -86,16 +86,6 @@ public final class PermisCommands {
         // ---------------- administration
         LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("permis").requires(s -> s.hasPermission(2));
         root.then(Commands.literal("recharger").executes(PermisCommands::reload));
-        root.then(Commands.literal("admin")
-                .executes(c -> {
-                    com.minenorth_permis.admin.AdminService.open(c.getSource().getPlayerOrException(), null);
-                    return 1;
-                })
-                .then(Commands.argument("nom", StringArgumentType.word()).suggests(KNOWN).executes(c -> {
-                    Optional<UUID> id = lookup(c.getSource().getServer(), StringArgumentType.getString(c, "nom"));
-                    com.minenorth_permis.admin.AdminService.open(c.getSource().getPlayerOrException(), id.orElse(null));
-                    return 1;
-                })));
 
         root.then(Commands.literal("donner")
                 .then(Commands.argument("joueur", EntityArgument.player())
@@ -181,10 +171,6 @@ public final class PermisCommands {
                 })));
 
         d.register(root);
-        d.register(Commands.literal("permisadmin").requires(s -> s.hasPermission(2)).executes(c -> {
-            com.minenorth_permis.admin.AdminService.open(c.getSource().getPlayerOrException(), null);
-            return 1;
-        }));
     }
 
     // ------------------------------------------------------------------ helpers

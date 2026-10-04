@@ -50,17 +50,20 @@ Réglages dans `shooting` : `hitsRequired`, `timeLimitSeconds`, `maxDistance`, `
 Les points (12 par défaut) ne concernent que le permis de conduire. À **0 point**, toutes les catégories du permis de conduire (voiture, poids lourd, moto) sont retirées (`revokeAtZeroPoints`) ; le joueur doit repasser les examens et repart à 12 points au premier permis obtenu.
 Retirer des points : `/permis points <pseudo> enlever <n>` ou `PermisApi.removePoints(...)`.
 
+### Carburant du véhicule de test
+Les véhicules MTS posés depuis un item neuf ont un réservoir vide. Le mod fait le **plein automatiquement** dès que le
+véhicule de test est posé (meilleur carburant accepté par le moteur, d'après la config MTS).
+Par test dans la config : `"fillFuel": true` (false pour désactiver) et `"fuelFluid": ""` (ex. `"diesel"` pour imposer un fluide).
+
 ## Papiers perdus (duplicata)
 Dans la boutique du PNJ, bouton « Papiers perdus ? » : le joueur choisit la carte à refaire et paie le duplicata (`duplicatePrice`, 50 € par défaut, espèces ou carte).
 L'ancienne carte est **annulée** : si quelqu'un la retrouve ou l'a volée, elle s'affiche « ANNULÉE » au clic droit.
 Un duplicata n'est possible que pour un papier encore valide et si le joueur n'a pas déjà la carte sur lui.
 
 ## Administration
-**Menu staff : `/permis admin` (ou `/permisadmin`, `/permis admin <pseudo>` pour ouvrir directement un joueur).**
-À gauche tous les joueurs connus (point vert = en ligne, nombre = permis valides, recherche). À droite, pour le joueur choisi :
-donner un permis (durée en jours, vide = config, 0 = permanent), le retirer, lui remettre une nouvelle carte (l'ancienne est annulée),
-ajuster ses points (−1 / +1 / Max ; 0 = retrait du permis de conduire), vider ses délais après échec, arrêter son épreuve en cours.
-Fonctionne aussi pour les joueurs hors ligne (sauf remise de carte). Chaque action est notée dans les logs du serveur.
+**Gestion des joueurs : panneau `/mnadmin` (mod `minenorth_admin`), onglet Permis** — donner / retirer un permis,
+nouvelle carte, points, délais d'examen, arrêter une épreuve. L'ancien menu `/permis admin` a été retiré.
+Les commandes ci-dessous restent disponibles (console, blocs de commande) :
 
 - `/permis donner <joueur> <licence> [jours]` (0 = permanent) — donne aussi la carte.
 - `/permis retirer <pseudo> <licence>` · `/permis voir <pseudo>`

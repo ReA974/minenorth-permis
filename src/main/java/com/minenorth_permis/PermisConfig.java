@@ -265,6 +265,10 @@ public final class PermisConfig {
         public int failCooldownMinutes = 30;
         /** Temps max pour poser le véhicule avant annulation. */
         public int placementTimeoutSeconds = 90;
+        /** Faire le plein du véhicule de test dès qu'il est posé (MTS : réservoir vide par défaut). */
+        public boolean fillFuel = true;
+        /** Carburant à mettre (nom du fluide MTS, ex. "diesel"). Vide = le meilleur accepté par le moteur. */
+        public String fuelFluid = "";
 
         DrivingTest() {}
 

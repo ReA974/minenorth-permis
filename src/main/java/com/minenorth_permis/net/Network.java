@@ -18,7 +18,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class Network {
-    private static final String PROTOCOL = "4";
+    private static final String PROTOCOL = "5";   // 5 : menu staff retiré (panneau minenorth_admin)
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(MinenorthPermis.MODID, "main"), () -> PROTOCOL, PROTOCOL::equals, PROTOCOL::equals);
 
@@ -37,8 +37,6 @@ public final class Network {
         CHANNEL.registerMessage(id++, HudPacket.class, HudPacket::encode, HudPacket::decode, HudPacket::handle);
         CHANNEL.registerMessage(id++, MarkersPacket.class, MarkersPacket::encode, MarkersPacket::decode, MarkersPacket::handle);
         CHANNEL.registerMessage(id++, CardPacket.class, CardPacket::encode, CardPacket::decode, CardPacket::handle);
-        CHANNEL.registerMessage(id++, AdminStatePacket.class, AdminStatePacket::encode, AdminStatePacket::decode, AdminStatePacket::handle);
-        CHANNEL.registerMessage(id++, AdminActionPacket.class, AdminActionPacket::encode, AdminActionPacket::decode, AdminActionPacket::handle);
     }
 
     public static void send(ServerPlayer p, Object msg) {

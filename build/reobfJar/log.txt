@@ -134,23 +134,17 @@ Adding Libraries to Inheritance
 Reading Input: C:\Users\diabl\Documents\Mes documents\minenorthrp\workspace mod 1.20\minenorth_permis\build\libs\minenorth_permis-1.3.1.jar
 Adding input to inheritance map
 Processing entries
-Conflicting propagated mapping for com/minenorth_permis/data/PermisData/save(Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/nbt/CompoundTag; from net/minecraft/world/level/saveddata/SavedData/save(Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/nbt/CompoundTag;: save -> m_7176_
-Conflicting propagated mapping for com/minenorth_permis/client/MnScreen/isPauseScreen()Z from net/minecraft/client/gui/screens/Screen/isPauseScreen()Z: isPauseScreen -> m_7043_
-Conflicting propagated mapping for com/minenorth_permis/client/MnScreen/render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V from net/minecraft/client/gui/screens/Screen/render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V: render -> m_88315_
-Conflicting propagated mapping for com/minenorth_permis/client/AdminPermisScreen/isPauseScreen()Z from net/minecraft/client/gui/screens/Screen/isPauseScreen()Z: isPauseScreen -> m_7043_
-Conflicting propagated mapping for com/minenorth_permis/client/AdminPermisScreen/render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V from net/minecraft/client/gui/screens/Screen/render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V: render -> m_88315_
-Conflicting propagated mapping for com/minenorth_permis/client/CardScreen/isPauseScreen()Z from net/minecraft/client/gui/screens/Screen/isPauseScreen()Z: isPauseScreen -> m_7043_
-Conflicting propagated mapping for com/minenorth_permis/client/AdminPermisScreen/mouseScrolled(DDD)Z from net/minecraft/client/gui/components/events/ContainerEventHandler/mouseScrolled(DDD)Z: mouseScrolled -> m_6050_
-Conflicting propagated mapping for com/minenorth_permis/client/MnScreen/onClose()V from net/minecraft/client/gui/screens/Screen/onClose()V: onClose -> m_7379_
-Conflicting propagated mapping for com/minenorth_permis/client/MnScreen/init()V from net/minecraft/client/gui/screens/Screen/init()V: init -> m_7856_
-Conflicting propagated mapping for com/minenorth_permis/client/CardScreen/render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V from net/minecraft/client/gui/screens/Screen/render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V: render -> m_88315_
-Conflicting propagated mapping for com/minenorth_permis/client/AdminPermisScreen/init()V from net/minecraft/client/gui/screens/Screen/init()V: init -> m_7856_
-Conflicting propagated mapping for com/minenorth_permis/client/AdminPermisScreen/mouseClicked(DDI)Z from net/minecraft/client/gui/components/events/ContainerEventHandler/mouseClicked(DDI)Z: mouseClicked -> m_6375_
-Conflicting propagated mapping for com/minenorth_permis/client/CategoryScreen/mouseScrolled(DDD)Z from net/minecraft/client/gui/components/events/ContainerEventHandler/mouseScrolled(DDD)Z: mouseScrolled -> m_6050_
 Conflicting propagated mapping for com/minenorth_permis/client/MnButton/updateWidgetNarration(Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V from net/minecraft/client/gui/components/AbstractWidget/updateWidgetNarration(Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V: updateWidgetNarration -> m_168797_
 Conflicting propagated mapping for com/minenorth_permis/client/MnButton/renderWidget(Lnet/minecraft/client/gui/GuiGraphics;IIF)V from net/minecraft/client/gui/components/AbstractButton/renderWidget(Lnet/minecraft/client/gui/GuiGraphics;IIF)V: renderWidget -> m_87963_
 Conflicting propagated mapping for com/minenorth_permis/client/MnButton/onPress()V from net/minecraft/client/gui/components/AbstractButton/onPress()V: onPress -> m_5691_
 Conflicting propagated mapping for com/minenorth_permis/client/DuplicateScreen$1/renderWidget(Lnet/minecraft/client/gui/GuiGraphics;IIF)V from com/minenorth_permis/client/MnButton/renderWidget(Lnet/minecraft/client/gui/GuiGraphics;IIF)V: renderWidget -> m_87963_
+Conflicting propagated mapping for com/minenorth_permis/client/MnScreen/isPauseScreen()Z from net/minecraft/client/gui/screens/Screen/isPauseScreen()Z: isPauseScreen -> m_7043_
+Conflicting propagated mapping for com/minenorth_permis/client/CardScreen/isPauseScreen()Z from net/minecraft/client/gui/screens/Screen/isPauseScreen()Z: isPauseScreen -> m_7043_
+Conflicting propagated mapping for com/minenorth_permis/client/CardScreen/render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V from net/minecraft/client/gui/screens/Screen/render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V: render -> m_88315_
+Conflicting propagated mapping for com/minenorth_permis/client/MnScreen/render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V from net/minecraft/client/gui/screens/Screen/render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V: render -> m_88315_
+Conflicting propagated mapping for com/minenorth_permis/client/MnScreen/onClose()V from net/minecraft/client/gui/screens/Screen/onClose()V: onClose -> m_7379_
+Conflicting propagated mapping for com/minenorth_permis/client/MnScreen/init()V from net/minecraft/client/gui/screens/Screen/init()V: init -> m_7856_
+Conflicting propagated mapping for com/minenorth_permis/client/CategoryScreen/mouseScrolled(DDD)Z from net/minecraft/client/gui/components/events/ContainerEventHandler/mouseScrolled(DDD)Z: mouseScrolled -> m_6050_
 Conflicting propagated mapping for com/minenorth_permis/client/DuplicateScreen/mouseScrolled(DDD)Z from net/minecraft/client/gui/components/events/ContainerEventHandler/mouseScrolled(DDD)Z: mouseScrolled -> m_6050_
 Conflicting propagated mapping for net/minecraftforge/client/gui/overlay/ForgeGui/clearCache()V from net/minecraft/client/gui/Gui/clearCache()V: clearCache -> m_93091_
 Conflicting propagated mapping for net/minecraftforge/client/gui/overlay/ForgeGui/render(Lnet/minecraft/client/gui/GuiGraphics;F)V from net/minecraft/client/gui/Gui/render(Lnet/minecraft/client/gui/GuiGraphics;F)V: render -> m_280421_
@@ -159,6 +153,7 @@ Conflicting propagated mapping for net/minecraftforge/client/gui/overlay/ForgeGu
 Conflicting propagated mapping for com/minenorth_permis/client/MyLicencesScreen/mouseScrolled(DDD)Z from net/minecraft/client/gui/components/events/ContainerEventHandler/mouseScrolled(DDD)Z: mouseScrolled -> m_6050_
 Conflicting propagated mapping for com/minenorth_permis/client/ShopHubScreen$Tile/renderWidget(Lnet/minecraft/client/gui/GuiGraphics;IIF)V from com/minenorth_permis/client/MnButton/renderWidget(Lnet/minecraft/client/gui/GuiGraphics;IIF)V: renderWidget -> m_87963_
 Conflicting propagated mapping for com/minenorth_permis/client/TestMenuScreen$Row/renderWidget(Lnet/minecraft/client/gui/GuiGraphics;IIF)V from com/minenorth_permis/client/MnButton/renderWidget(Lnet/minecraft/client/gui/GuiGraphics;IIF)V: renderWidget -> m_87963_
+Conflicting propagated mapping for com/minenorth_permis/data/PermisData/save(Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/nbt/CompoundTag; from net/minecraft/world/level/saveddata/SavedData/save(Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/nbt/CompoundTag;: save -> m_7176_
 Conflicting propagated mapping for com/minenorth_permis/items/PermisCardItem/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
 Conflicting propagated mapping for com/minenorth_permis/items/PermisCardItem/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder; from net/minecraft/world/item/Item/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;: use -> m_7203_
 Conflicting propagated mapping for com/minenorth_permis/items/PermisCardItem/interactLivingEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult; from net/minecraft/world/item/Item/interactLivingEntity(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;: interactLivingEntity -> m_6880_
@@ -206,11 +201,7 @@ Writing Output: C:\Users\diabl\Documents\Mes documents\minenorthrp\workspace mod
   com/minenorth_permis/ServerEvents.class
   com/minenorth_permis/Shop.class
   com/minenorth_permis/SkriptImport.class
-  com/minenorth_permis/admin/
-  com/minenorth_permis/admin/AdminService$1.class
-  com/minenorth_permis/admin/AdminService.class
   com/minenorth_permis/client/
-  com/minenorth_permis/client/AdminPermisScreen.class
   com/minenorth_permis/client/BuyScreen.class
   com/minenorth_permis/client/CardScreen.class
   com/minenorth_permis/client/CategoryScreen.class
@@ -244,11 +235,6 @@ Writing Output: C:\Users\diabl\Documents\Mes documents\minenorthrp\workspace mod
   com/minenorth_permis/items/ModItems.class
   com/minenorth_permis/items/PermisCardItem.class
   com/minenorth_permis/net/
-  com/minenorth_permis/net/AdminActionPacket$Op.class
-  com/minenorth_permis/net/AdminActionPacket.class
-  com/minenorth_permis/net/AdminStatePacket$Lic.class
-  com/minenorth_permis/net/AdminStatePacket$Player.class
-  com/minenorth_permis/net/AdminStatePacket.class
   com/minenorth_permis/net/CardPacket$Line.class
   com/minenorth_permis/net/CardPacket.class
   com/minenorth_permis/net/HudPacket.class
@@ -265,6 +251,8 @@ Writing Output: C:\Users\diabl\Documents\Mes documents\minenorthrp\workspace mod
   com/minenorth_permis/tests/DrivingTests$Phase.class
   com/minenorth_permis/tests/DrivingTests$Session.class
   com/minenorth_permis/tests/DrivingTests.class
+  com/minenorth_permis/tests/MtsFuel$Result.class
+  com/minenorth_permis/tests/MtsFuel.class
   com/minenorth_permis/tests/ShootingTests$Session.class
   com/minenorth_permis/tests/ShootingTests.class
   com/minenorth_permis/util/

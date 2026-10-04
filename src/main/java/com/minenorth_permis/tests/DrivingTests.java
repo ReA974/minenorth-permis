@@ -49,6 +49,8 @@ public final class DrivingTests {
         int clock;
         UUID vehicle;
         Item vehicleItem;
+        /** Plein du véhicule : essais restants (les moteurs MTS arrivent quelques ticks après l'apparition). */
+        int fuelTries = 100;
         PermisData.Loc ret;
     }
 
@@ -174,6 +176,17 @@ public final class DrivingTests {
                 continue;
             }
             se.clock++;
+
+            if (se.phase == Phase.RUNNING && se.fuelTries > 0) {
+                if (!t.fillFuel) {
+                    se.fuelTries = 0;
+                } else {
+                    Entity v = se.vehicle != null ? Util.findEntity(s, se.vehicle) : null;
+                    if (v == null && p.getVehicle() != null) v = p.getVehicle().getRootVehicle();
+                    MtsFuel.Result r = MtsFuel.fill(v, t.fuelFluid);
+                    if (r != MtsFuel.Result.RETRY || --se.fuelTries <= 0) se.fuelTries = 0;
+                }
+            }
 
             // Abandon : sneak maintenu
             if (p.isShiftKeyDown()) {

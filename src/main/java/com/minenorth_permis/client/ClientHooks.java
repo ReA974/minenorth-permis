@@ -29,12 +29,6 @@ public final class ClientHooks {
         });
     }
 
-    public static void handleAdmin(com.minenorth_permis.net.AdminStatePacket m) {
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.screen instanceof AdminPermisScreen s) s.update(m);
-        else if (m.open) mc.setScreen(new AdminPermisScreen(m));
-    }
-
     public static void handleCard(CardPacket m) {
         Minecraft.getInstance().setScreen(new CardScreen(m));
     }
