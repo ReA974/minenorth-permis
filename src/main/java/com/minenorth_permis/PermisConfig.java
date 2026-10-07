@@ -32,6 +32,8 @@ public final class PermisConfig {
 
     /** Charge le fichier (le crée avec les valeurs par défaut s'il n'existe pas). Renvoie un message d'erreur ou null. */
     public static String load() {
+        // Config côté serveur uniquement : le client ne crée ni ne lit aucun fichier.
+        if (net.minecraftforge.fml.loading.FMLEnvironment.dist != net.minecraftforge.api.distmarker.Dist.DEDICATED_SERVER) return null;
         Path f = file();
         try {
             if (!Files.exists(f)) {
