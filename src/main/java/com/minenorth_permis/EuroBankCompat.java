@@ -7,12 +7,14 @@ import net.minecraftforge.fml.ModList;
 import java.lang.reflect.Method;
 
 /**
- * Pont vers le mod d'économie minenorth_eurobank (espèces + carte), par réflexion :
- * aucune dépendance de compilation, et le mod reste chargeable sans EuroBank (paiements alors indisponibles).
+ * Paiements du mod Permis. Carte : MineNorth API (banque + trésor public). Espèces : billets EuroBank, par réflexion.
+ * Tout ce qui est encaissé part au trésor public sous la source "permis" ; un remboursement l'en reprend.
  */
 public final class EuroBankCompat {
     private static boolean init, ok;
     private static Method cashIn, takeAllCash, giveCash, check, charge, balance, hasAccount, payMessage, refund;
+
+    private static final String SOURCE = "permis";
 
     private EuroBankCompat() {}
 
@@ -60,6 +62,7 @@ public final class EuroBankCompat {
             long taken = (long) takeAllCash.invoke(null, p);
             long change = taken - cents;
             if (change > 0) giveCash.invoke(null, p, change);
+            if (p instanceof ServerPlayer sp) fr.minenorth.api.MineNorth.treasury().collect(sp.server, cents, SOURCE);
             return true;
         } catch (Exception e) {
             MinenorthPermis.LOG.error("[Permis] Paiement espèces échoué", e);
@@ -69,33 +72,27 @@ public final class EuroBankCompat {
 
     /** null si le paiement par carte est possible, sinon le message d'erreur. */
     public static String cardCheck(ServerPlayer p, long cents) {
-        if (!available()) return "Paiement par carte indisponible.";
-        try {
-            Enum<?> r = (Enum<?>) check.invoke(null, p, cents);
-            return r.name().equals("OK") ? null : (String) payMessage.invoke(r);
-        } catch (Exception e) {
-            return "Erreur bancaire.";
-        }
+        fr.minenorth.api.PayResult r = fr.minenorth.api.MineNorth.bank().check(p, cents);
+        return r.ok() ? null : r.message();
     }
 
     /** null si payé, sinon le message d'erreur. */
     public static String payCard(ServerPlayer p, long cents) {
-        if (!available()) return "Paiement par carte indisponible.";
-        try {
-            Enum<?> r = (Enum<?>) charge.invoke(null, p, cents);
-            return r.name().equals("OK") ? null : (String) payMessage.invoke(r);
-        } catch (Exception e) {
-            MinenorthPermis.LOG.error("[Permis] Paiement carte échoué", e);
-            return "Erreur bancaire.";
-        }
+        fr.minenorth.api.PayResult r = fr.minenorth.api.MineNorth.bank().charge(p, cents, SOURCE);
+        return r.ok() ? null : r.message();
     }
 
     /** Rembourse un paiement (espèces rendues ou compte recrédité). */
     public static void refund(ServerPlayer p, long cents, boolean card) {
-        if (!available() || cents <= 0) return;
+        if (cents <= 0) return;
+        if (card) {
+            fr.minenorth.api.MineNorth.bank().refund(p.server, p.getUUID(), cents, SOURCE);
+            return;
+        }
+        if (!available()) return;
         try {
-            if (card) refund.invoke(null, p, cents);
-            else giveCash.invoke(null, p, cents);
+            giveCash.invoke(null, p, cents);
+            fr.minenorth.api.MineNorth.treasury().collect(p.server, -cents, SOURCE);
         } catch (Exception e) {
             MinenorthPermis.LOG.error("[Permis] Remboursement échoué ({} centimes à {})", cents, p.getGameProfile().getName(), e);
         }
@@ -103,13 +100,8 @@ public final class EuroBankCompat {
 
     /** Solde du compte en centimes, -1 si pas de compte / EuroBank absent. */
     public static long balance(ServerPlayer p) {
-        if (!available()) return -1;
-        try {
-            if (!(boolean) hasAccount.invoke(null, p)) return -1;
-            return (long) balance.invoke(null, p);
-        } catch (Exception e) {
-            return -1;
-        }
+        var bank = fr.minenorth.api.MineNorth.bank();
+        return bank.hasAccount(p.server, p.getUUID()) ? bank.balance(p.server, p.getUUID()) : -1;
     }
 
     public static String format(long cents) {

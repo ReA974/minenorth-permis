@@ -26,6 +26,7 @@ public class MinenorthPermis {
         ModItems.TABS.register(bus);
         bus.addListener(this::commonSetup);
         PermisConfig.load();
+        fr.minenorth.api.MineNorth.provide(fr.minenorth.api.LicenceService.class, new LicenceProvider());
         MinecraftForge.EVENT_BUS.register(ServerEvents.class);
     }
 

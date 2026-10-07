@@ -63,7 +63,7 @@ public class PermisCardItem extends Item {
             t.putString("Group", g.id);
             t.putString("Style", g.style);
             t.putUUID("Holder", p.getUUID());
-            t.putString("HolderName", p.getGameProfile().getName());
+            t.putString("HolderName", fr.minenorth.api.MineNorth.displayName(p));
             t.putInt("Serial", nextSerial(p, "g:" + g.id));
             refresh(s, p);
             return s;
@@ -74,7 +74,7 @@ public class PermisCardItem extends Item {
         t.putString("LicenceName", def != null ? def.name : licence);
         t.putString("Style", styleFor(def));
         t.putUUID("Holder", p.getUUID());
-        t.putString("HolderName", p.getGameProfile().getName());
+        t.putString("HolderName", fr.minenorth.api.MineNorth.displayName(p));
         Long iss = Licences.issued(p.server, p.getUUID(), licence);
         Long exp = Licences.expiry(p.server, p.getUUID(), licence);
         t.putLong("Issued", iss != null ? iss : System.currentTimeMillis());
@@ -165,8 +165,8 @@ public class PermisCardItem extends Item {
             return target instanceof Player ? InteractionResult.SUCCESS : InteractionResult.PASS;
         }
         if (!s.hasTag() || !s.getTag().hasUUID("Holder")) return InteractionResult.PASS;
-        Network.sendCard(other, s, sp.getGameProfile().getName());
-        Msg.info(sp, "Tu montres ta carte à " + other.getGameProfile().getName() + ".");
+        Network.sendCard(other, s, fr.minenorth.api.MineNorth.displayName(sp));
+        Msg.info(sp, "Tu montres ta carte à " + fr.minenorth.api.MineNorth.displayName(other) + ".");
         return InteractionResult.SUCCESS;
     }
 

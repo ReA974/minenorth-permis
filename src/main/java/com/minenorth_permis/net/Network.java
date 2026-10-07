@@ -51,7 +51,7 @@ public final class Network {
     /** Ouvre (ou rafraîchit) un écran pour le joueur, sur ses propres permis. */
     public static void openMenu(ServerPlayer p, byte screen, boolean open, String message, boolean ok) {
         if (screen != MenuStatePacket.MY) MENU_SESSIONS.put(p.getUUID(), System.currentTimeMillis() + SESSION_MS);
-        send(p, MenuStatePacket.compute(p, p.getUUID(), p.getGameProfile().getName(), screen, open, message, ok));
+        send(p, MenuStatePacket.compute(p, p.getUUID(), fr.minenorth.api.MineNorth.displayName(p), screen, open, message, ok));
     }
 
     /** Écran de paiement de l'épreuve de tir (zone peut être null : aucune zone trouvée). */
@@ -59,7 +59,7 @@ public final class Network {
         MENU_SESSIONS.put(p.getUUID(), System.currentTimeMillis() + SESSION_MS);
         if (zone != null) TIR_PENDING.put(p.getUUID(), zone);
         else TIR_PENDING.remove(p.getUUID());
-        MenuStatePacket m = MenuStatePacket.compute(p, p.getUUID(), p.getGameProfile().getName(), MenuStatePacket.TIR, open, message, ok);
+        MenuStatePacket m = MenuStatePacket.compute(p, p.getUUID(), fr.minenorth.api.MineNorth.displayName(p), MenuStatePacket.TIR, open, message, ok);
         m.tirZone = zone == null ? "" : zone;
         String why = com.minenorth_permis.tests.ShootingTests.blocker(p, zone);
         m.blocker = why == null ? "" : why;
@@ -70,7 +70,7 @@ public final class Network {
     public static void closeMenu(ServerPlayer p, byte screen) {
         MENU_SESSIONS.remove(p.getUUID());
         TIR_PENDING.remove(p.getUUID());
-        MenuStatePacket m = MenuStatePacket.compute(p, p.getUUID(), p.getGameProfile().getName(), screen, false, "", true);
+        MenuStatePacket m = MenuStatePacket.compute(p, p.getUUID(), fr.minenorth.api.MineNorth.displayName(p), screen, false, "", true);
         m.close = true;
         send(p, m);
     }

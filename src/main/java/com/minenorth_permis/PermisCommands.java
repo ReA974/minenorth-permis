@@ -75,7 +75,7 @@ public final class PermisCommands {
         d.register(Commands.literal("mespermis")
                 .executes(c -> {
                     ServerPlayer p = c.getSource().getPlayerOrException();
-                    Network.openMyLicences(p, p.getUUID(), p.getGameProfile().getName());
+                    Network.openMyLicences(p, p.getUUID(), fr.minenorth.api.MineNorth.displayName(p));
                     return 1;
                 })
                 .then(Commands.argument("nom", StringArgumentType.word()).suggests(KNOWN)
@@ -113,12 +113,12 @@ public final class PermisCommands {
                 .then(Commands.argument("joueur", EntityArgument.player()).executes(c -> {
                     ServerPlayer p = EntityArgument.getPlayer(c, "joueur");
                     boolean ok = DrivingTests.stop(p) | ShootingTests.stop(p);
-                    c.getSource().sendSuccess(() -> ok ? Msg.okc("Épreuve arrêtée.") : Msg.errc("Ce joueur ne passe aucune épreuve."), false);
+                    c.getSource().sendSystemMessage(ok ? Msg.okc("Épreuve arrêtée.") : Msg.errc("Ce joueur ne passe aucune épreuve."));
                     return ok ? 1 : 0;
                 })));
         root.then(Commands.literal("importskript").executes(c -> {
             String r = SkriptImport.run(c.getSource().getServer());
-            c.getSource().sendSuccess(() -> Msg.okc(r), true);
+            c.getSource().sendSystemMessage(Msg.okc(r));
             return 1;
         }));
 
@@ -145,13 +145,13 @@ public final class PermisCommands {
                     PermisData data = PermisData.get(c.getSource().getServer());
                     boolean ok = data.ranges().remove(n) != null;
                     data.setDirty();
-                    c.getSource().sendSuccess(() -> ok ? Msg.okc("Zone de tir " + n + " supprimée.") : Msg.errc("Zone inconnue."), true);
+                    c.getSource().sendSystemMessage(ok ? Msg.okc("Zone de tir " + n + " supprimée.") : Msg.errc("Zone inconnue."));
                     return ok ? 1 : 0;
                 })))
                 .then(Commands.literal("voir").then(Commands.argument("nom", StringArgumentType.word()).suggests(RANGES).executes(c -> {
                     ServerPlayer p = c.getSource().getPlayerOrException();
                     int n = ShootingTests.preview(p, StringArgumentType.getString(c, "nom"));
-                    c.getSource().sendSuccess(() -> n < 0 ? Msg.errc("Zone inconnue.") : Msg.okc("Aperçu 30 s : " + n + " cible(s) détectée(s) dans la zone."), false);
+                    c.getSource().sendSystemMessage(n < 0 ? Msg.errc("Zone inconnue.") : Msg.okc("Aperçu 30 s : " + n + " cible(s) détectée(s) dans la zone."));
                     return 1;
                 })))
                 .then(Commands.literal("lancer").then(Commands.argument("joueur", EntityArgument.player())
@@ -165,8 +165,8 @@ public final class PermisCommands {
                         }))))
                 .then(Commands.literal("liste").executes(c -> {
                     Map<String, PermisData.Range> r = ShootingTests.ranges(c.getSource().getServer());
-                    if (r.isEmpty()) c.getSource().sendSuccess(() -> Msg.errc("Aucune zone de tir."), false);
-                    r.forEach((k, v) -> c.getSource().sendSuccess(() -> Msg.okc(k + " : " + v.dim + " " + v.min.toShortString() + " → " + v.max.toShortString()), false));
+                    if (r.isEmpty()) c.getSource().sendSystemMessage(Msg.errc("Aucune zone de tir."));
+                    r.forEach((k, v) -> c.getSource().sendSystemMessage(Msg.okc(k + " : " + v.dim + " " + v.min.toShortString() + " → " + v.max.toShortString())));
                     return r.size();
                 })));
 
@@ -210,7 +210,7 @@ public final class PermisCommands {
     private static int reload(CommandContext<CommandSourceStack> c) {
         String err = PermisConfig.load();
         if (err == null) {
-            c.getSource().sendSuccess(() -> Msg.okc("Configuration rechargée (" + PermisConfig.get().licences.size() + " permis/licences)."), true);
+            c.getSource().sendSystemMessage(Msg.okc("Configuration rechargée (" + PermisConfig.get().licences.size() + " permis/licences)."));
             return 1;
         }
         c.getSource().sendFailure(Msg.errc("Erreur dans minenorth_permis.json : " + err));
@@ -249,7 +249,7 @@ public final class PermisCommands {
         }
         Shop.obtain(p, def.id, days);
         Msg.ok(p, "Tu as obtenu : " + def.name + ".");
-        c.getSource().sendSuccess(() -> Msg.okc(def.name + " donné à " + p.getGameProfile().getName() + "."), true);
+        c.getSource().sendSystemMessage(Msg.okc(def.name + " donné à " + fr.minenorth.api.MineNorth.displayName(p) + "."));
         return 1;
     }
 
@@ -265,7 +265,7 @@ public final class PermisCommands {
         ServerPlayer p = s.getPlayerList().getPlayer(id.get());
         PermisConfig.Licence def = PermisConfig.get().licence(lic);
         if (p != null) Msg.err(p, "Ton " + (def != null ? def.name : lic) + " t'a été retiré.");
-        c.getSource().sendSuccess(() -> Msg.okc(lic + " retiré à " + name + "."), true);
+        c.getSource().sendSystemMessage(Msg.okc(lic + " retiré à " + name + "."));
         return 1;
     }
 
@@ -287,7 +287,7 @@ public final class PermisCommands {
         int max = PermisConfig.get().maxPoints;
         ServerPlayer p = s.getPlayerList().getPlayer(id.get());
         if (p != null && !op.equals("voir")) Msg.warn(p, "Points de permis : " + v + "/" + max);
-        c.getSource().sendSuccess(() -> Msg.okc(name + " : " + v + "/" + max + " points."), !op.equals("voir"));
+        c.getSource().sendSystemMessage(Msg.okc(name + " : " + v + "/" + max + " points."));
         return v;
     }
 
@@ -346,7 +346,7 @@ public final class PermisCommands {
         }
         data.setDirty();
         String fm = msg;
-        c.getSource().sendSuccess(() -> Msg.okc(fm), false);
+        c.getSource().sendSystemMessage(Msg.okc(fm));
         if (!op.equals("voir")) DrivingTests.preview(p, t.id);
         return 1;
     }
@@ -356,8 +356,8 @@ public final class PermisCommands {
         HitResult hit = p.pick(12, 0, false);
         BlockPos pos = hit instanceof BlockHitResult bh && hit.getType() == HitResult.Type.BLOCK ? bh.getBlockPos() : p.blockPosition();
         SELECTIONS.computeIfAbsent(p.getUUID(), k -> new BlockPos[2])[idx] = pos;
-        c.getSource().sendSuccess(() -> Msg.okc("Coin " + (idx + 1) + " de la zone de tir : " + pos.toShortString()
-                + " (bloc visé). Puis /permis tir creer <nom>."), false);
+        c.getSource().sendSystemMessage(Msg.okc("Coin " + (idx + 1) + " de la zone de tir : " + pos.toShortString()
+                + " (bloc visé). Puis /permis tir creer <nom>."));
         return 1;
     }
 
@@ -378,7 +378,7 @@ public final class PermisCommands {
         data.setDirty();
         SELECTIONS.remove(p.getUUID());
         int n = ShootingTests.preview(p, name);
-        c.getSource().sendSuccess(() -> Msg.okc("Zone de tir \"" + name + "\" créée : " + n + " cible(s) détectée(s)."), true);
+        c.getSource().sendSystemMessage(Msg.okc("Zone de tir \"" + name + "\" créée : " + n + " cible(s) détectée(s)."));
         return 1;
     }
 }
