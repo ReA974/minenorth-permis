@@ -84,3 +84,9 @@ Dans la config, `onGrant` / `onRevoke` permettent aussi de lancer des commandes 
 
 ## Compiler
 `gradlew build` → `build/libs/minenorth_permis-1.0.0.jar` (même structure que ton projet EuroBank).
+
+## Licence
+
+**Tous droits réservés - MineNorthRP.** Réutilisation, copie, modification, décompilation / ingénierie
+inverse (y compris par outils d'intelligence artificielle) et utilisation pour entraîner une IA sont
+**interdites** sans autorisation écrite. Voir [LICENSE](LICENSE).
