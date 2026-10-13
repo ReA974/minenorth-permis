@@ -17,14 +17,9 @@ public final class ModItems {
 
     public static final RegistryObject<PermisCardItem> CARD = ITEMS.register("permis_card", PermisCardItem::new);
 
-    public static final RegistryObject<CreativeModeTab> TAB = TABS.register("main", () ->
-            CreativeModeTab.builder()
-                    .title(Component.translatable("itemGroup.minenorth_permis"))
-                    .icon(() -> PermisCardItem.preview("permis"))
-                    .displayItems((params, out) -> {
+    public static final net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator TAB_ITEMS = (params, out) -> {
                         for (String s : PermisCardItem.STYLES) out.accept(PermisCardItem.preview(s));
-                    })
-                    .build());
+                    };
 
     private ModItems() {}
 }
