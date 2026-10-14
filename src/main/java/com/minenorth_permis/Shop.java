@@ -57,7 +57,7 @@ public final class Shop {
             reply(p, "Tu as déjà : " + l.name + ".", false);
             return;
         }
-        long price = l.priceCents();
+        long price = fr.minenorth.api.MineNorth.discounted(p.server, p.getUUID(), l.priceCents());   // remise de grade (VIP)
         String err = pay(p, price, action == Action.BUY_CARD);
         if (err != null) {
             reply(p, err, false);
@@ -111,7 +111,7 @@ public final class Shop {
             reply(p, "Tu as déjà cette carte sur toi.", false);
             return;
         }
-        long price = Math.round(PermisConfig.get().duplicatePrice * 100);
+        long price = fr.minenorth.api.MineNorth.discounted(p.server, p.getUUID(), Math.round(PermisConfig.get().duplicatePrice * 100));
         String err = pay(p, price, card);
         if (err != null) {
             reply(p, err, false);
