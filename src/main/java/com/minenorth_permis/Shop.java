@@ -156,14 +156,13 @@ public final class Shop {
         PermisConfig.Licence def = PermisConfig.get().licence(licence);
         PermisConfig.CardGroup g = def == null ? null : PermisConfig.get().group(def.cardGroup);
         if (g != null) {
-            var inv = p.getInventory();
-            for (int i = 0; i < inv.getContainerSize(); i++) {
-                ItemStack st = inv.getItem(i);
-                if (PermisCardItem.isGroupCard(st, g.id, p.getUUID()) && !PermisCardItem.isCancelled(st, com.minenorth_permis.data.PermisData.get(p.server))) {
-                    PermisCardItem.refresh(st, p);
-                    Msg.ok(p, "Catégorie " + (def.code.isEmpty() ? def.name : def.code + " (" + def.name + ")") + " ajoutée sur ton " + g.name + ".");
-                    return;
-                }
+            var data = com.minenorth_permis.data.PermisData.get(p.server);
+            boolean found = fr.minenorth.api.Carried.modify(p,
+                    st -> PermisCardItem.isGroupCard(st, g.id, p.getUUID()) && !PermisCardItem.isCancelled(st, data),
+                    st -> PermisCardItem.refresh(st, p));
+            if (found) {
+                Msg.ok(p, "Catégorie " + (def.code.isEmpty() ? def.name : def.code + " (" + def.name + ")") + " ajoutée sur ton " + g.name + ".");
+                return;
             }
         }
         ItemStack card = PermisCardItem.create(p, licence);

@@ -114,12 +114,7 @@ public class PermisCardItem extends Item {
     /** Le joueur a-t-il sur lui une carte non annulée de ce type ? */
     public static boolean hasActiveCard(ServerPlayer p, String key) {
         PermisData d = PermisData.get(p.server);
-        var inv = p.getInventory();
-        for (int i = 0; i < inv.getContainerSize(); i++) {
-            ItemStack st = inv.getItem(i);
-            if (st.getItem() instanceof PermisCardItem && p.getUUID().equals(holder(st)) && key.equals(cardKey(st)) && !isCancelled(st, d)) return true;
-        }
-        return false;
+        return fr.minenorth.api.Carried.has(p, st -> st.getItem() instanceof PermisCardItem && p.getUUID().equals(holder(st)) && key.equals(cardKey(st)) && !isCancelled(st, d));
     }
 
     public static boolean isGroupCard(ItemStack s, String group, UUID holder) {
