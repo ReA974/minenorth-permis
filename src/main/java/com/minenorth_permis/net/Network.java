@@ -32,11 +32,11 @@ public final class Network {
 
     public static void register() {
         int id = 0;
-        CHANNEL.registerMessage(id++, MenuStatePacket.class, MenuStatePacket::encode, MenuStatePacket::decode, MenuStatePacket::handle);
-        CHANNEL.registerMessage(id++, MenuActionPacket.class, MenuActionPacket::encode, MenuActionPacket::decode, MenuActionPacket::handle);
-        CHANNEL.registerMessage(id++, HudPacket.class, HudPacket::encode, HudPacket::decode, HudPacket::handle);
-        CHANNEL.registerMessage(id++, MarkersPacket.class, MarkersPacket::encode, MarkersPacket::decode, MarkersPacket::handle);
-        CHANNEL.registerMessage(id++, CardPacket.class, CardPacket::encode, CardPacket::decode, CardPacket::handle);
+        CHANNEL.registerMessage(id++, MenuStatePacket.class, MenuStatePacket::encode, MenuStatePacket::decode, MenuStatePacket::handle, java.util.Optional.of(net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(id++, MenuActionPacket.class, MenuActionPacket::encode, MenuActionPacket::decode, MenuActionPacket::handle, java.util.Optional.of(net.minecraftforge.network.NetworkDirection.PLAY_TO_SERVER));
+        CHANNEL.registerMessage(id++, HudPacket.class, HudPacket::encode, HudPacket::decode, HudPacket::handle, java.util.Optional.of(net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(id++, MarkersPacket.class, MarkersPacket::encode, MarkersPacket::decode, MarkersPacket::handle, java.util.Optional.of(net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(id++, CardPacket.class, CardPacket::encode, CardPacket::decode, CardPacket::handle, java.util.Optional.of(net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT));
     }
 
     public static void send(ServerPlayer p, Object msg) {
